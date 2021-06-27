@@ -15,7 +15,29 @@ body {
 #navigation{
     display: flex;
     justify-content: flex-end;
+
   }
+
+#settings, #restart{
+  border:none;
+  font-size: 1.5rem;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 5px;
+  margin-top: 10px;
+  color:#181010;;
+  background-color: rgba(206, 205, 205, 0.905);
+}
+
+#settings:hover, #restart:hover{
+  filter: brightness(90%);
+}
+
+#settings:active, #restart:active{
+  transform: translate(0, 0.1rem);
+  box-shadow: 0 0.2rem rgba(116, 111, 111, 0.624);
+}
 
 #title{
   text-align: center;
@@ -25,6 +47,7 @@ body {
 h1{
   color:rgba(136, 131, 131, 0.905);
   text-shadow: 2px 2px #4b2727;
+  margin-top: 10px; 
 }
 
 #container{
@@ -36,8 +59,9 @@ h1{
 .gameboard {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  width: 60%;
-  height: 60%;
+  width: 50%;
+  height: 50%;
+  padding-top: 4%;
   padding-bottom: 15%;
 }
 
@@ -70,4 +94,23 @@ h1{
 
   .square:hover{
     background-color: rgba(10, 0, 0, 0.2);
+  }
+
+
+
+  @media screen and (max-width:900px) {
+    .gameboard{
+      width: 80%;
+      height: 80%;
+    }
+  }
+
+  @media screen and (max-width:600px) {
+    .gameboard{
+      width: 95%;
+      height: 95%;
+    }
+    #title{
+      font-size:1.5em;
+    }
   }
