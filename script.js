@@ -1,43 +1,73 @@
 
-// For today:
-
-// create an array object using factory function
-// polish game board
 
 // a board that returns game input
 
 const gameBoard = (() => {
-    let board = ["x", "o", "x", "o", "x", "o", "o", "x", "x"];
+    let board = ["","","","","","","","",""];
     const squares = document.getElementsByClassName("square");
     const squareArr = Array.from(squares);
 
-    // add index and array to the grid
-    for(i = 0; i < squareArr.length; i++){
-        const square = squareArr[i];        
-        const gameInput = document.createElement("span");
-        gameInput.className = "gameInput";
-        gameInput.id = i;
-        square.appendChild(gameInput);
 
-        gameInput.textContent = board[i];
+    // add index and array to the grid
+    
+    for(i = 0; i < squareArr.length; i++){
+        const square = squareArr[i];  
+        square.id = i;      
+        square.textContent = board[i];
     }
 
-    
-
-    // function test(){
-    //     console.log('test');
-    // }
-
-    return { board };
+    return { board, squareArr };
 })();
 
-// display array
+const createPlayer = (name, figure) => {  
+    return{ name, figure}
+}
+
+const game = (() => {
+
+    
+    const Player1 = createPlayer("Player1", "x");
+    const Player2 = createPlayer("Player2", "o");
+
+    // let round = 1;
+
+    // gameBoard.squareArr.forEach(square => {
+    //     square.addEventListener("click", () =>{
+    //         Player1.turn();
+    //     })
+    // })
+    let round = 1;
 
 
+    function turn(){
+
+        if(round % 2 === 0){
+            this.textContent = Player1.figure;
+            gameBoard.board.splice(this.id, 1, Player1.figure);
+            this.disabled = true;
+        }
+        else{
+            this.textContent = Player2.figure;
+            gameBoard.board.splice(this.id, 1, Player2.figure);
+            this.disabled = true;
+        }
+
+        console.log(gameBoard.board);
+        console.log(this)
+
+        round++;
+        console.log(round);
+    }
 
 
+    gameBoard.squareArr.forEach(square => {
+        square.addEventListener("click", turn)
+    })
 
-// pseudo on display logic!!! START HERE!!!
-// function for displaying the correct value on the sqaures
-// start with displaying an array
 
+    // function test(){
+    //     Player1.turn();
+    // }
+
+
+})();
