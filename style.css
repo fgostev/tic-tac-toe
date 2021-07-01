@@ -59,21 +59,22 @@ h1{
 .gameboard {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  width: 50%;
-  height: 50%;
-  padding-top: 4%;
-  padding-bottom: 15%;
+  width: 40%;
+  height: 40%;
+  margin-bottom: 5%;
 }
 
   
 .square { 
-    width: 100%;
-    padding-top: 100%;
     cursor: pointer;
     background-color: transparent;
     border: 3px solid rgba(136, 131, 131, 0.905);
+    font-size: 7rem;
+    font-family: 'Indie Flower', cursive;
+    padding-bottom: 10%;
+    color:rgba(72, 5, 5, 0.624);
+  }
 
-}
 
   .square.brdright{
     border-right: none;
@@ -97,11 +98,10 @@ h1{
   }
 
 
-
   @media screen and (max-width:900px) {
     .gameboard{
-      width: 80%;
-      height: 80%;
+      width: 65%;
+      height: 65%;
     }
   }
 
