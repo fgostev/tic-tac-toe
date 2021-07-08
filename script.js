@@ -31,8 +31,8 @@ const game = (() => {
 
 
     
-    const Player1 = createPlayer("Player1", "x");
-    const Player2 = createPlayer("Player2", "o");
+    const Player1 = createPlayer("Player 1", "x");
+    const Player2 = createPlayer("Player 2", "o");
 
     let round = 1;
 
@@ -54,10 +54,6 @@ const game = (() => {
         }
         gameWinner();
         round++;
-
-            console.log("x" + " " + player1Moves);
-            console.log("o" + " " + player2Moves);
-        // indexCountTest();
     }
 
 
@@ -107,14 +103,14 @@ let player2Moves = [];
         winningLines.forEach(line =>{
            if(gameChecker(line, player1Moves).length === 3){
             player1Win = true;
-            winner.textContent = "Player 1 WIN!"
+            openModal(Player1.name);
             }
             else if(gameChecker(line, player2Moves).length === 3){
                 player2Win = true;
-                winner.textContent = "Player 2 WIN!"
+                openModal(Player2.name);
             }else if(player1Moves.length > 4 && player2Moves.length > 3){
                 tie = true;
-                winner.textContent = "TIE!"
+                openModal();
             }
 
     })
@@ -134,7 +130,6 @@ function restartBoard(){
     player2Win = false;
     tie = false;
     round = 1;
-
     gameBoard.squareArr.forEach(square =>{
         square.textContent = "";
         square.disabled = false;
@@ -147,11 +142,52 @@ restart.addEventListener('click', restartBoard);
         square.addEventListener("click", turn)
     })
 
+// win message
+
+
+const modalWin = document.getElementsByClassName("modalWin")[0];
+
+function openModal(player){
+    modalWin.style.display = 'block';
+    const h3 = document.getElementById("winner");
+    const p = document.getElementById("trophy");
+    trophy = p.children[0];
+    if(player2Win === true || player1Win === true){
+        h3.textContent = `${player} won!`;
+        trophy.className = "fas fa-trophy";
+    } else{
+        h3.textContent = "TIE!"
+        trophy.className = "fas fa-equals";
+    }
+}
+
+
+function closeModal(){
+    modalWin.style.display = 'none';
+}
+function clickOutside(e){
+    if(e.target == modalWin){
+        modalWin.style.display = 'none';
+    }
+}
+
+
+
+window.addEventListener('click', clickOutside);
+
+const closeBtn = document.getElementById('closeBtn');
+closeBtn.addEventListener('click', closeModal);
+
+const tryAgainBtn = document.getElementById('tryagain');
+
+tryAgainBtn.addEventListener('click', () =>{
+    restartBoard();
+    closeModal();
+});
 
 })();
 
 // for today:
-// restart button
 // modal for winner
 // modal for settings and player customization
 
