@@ -13,7 +13,6 @@ body {
 #navigation{
     display: flex;
     justify-content: flex-end;
-
   }
 
   #settings, #restart{
@@ -61,6 +60,8 @@ h1{
   width: 40%;
   height: 40%; 
   margin-bottom: 5%;
+      display: none;
+
 }
 
   
@@ -94,6 +95,101 @@ h1{
 
   .square:hover{
     background-color: rgba(10, 0, 0, 0.2);
+  }
+
+  /* settings */
+
+  .settings{
+    position: fixed; 
+    overflow-y: scroll;
+    z-index: 1;
+    left: 0; 
+    top: 0; 
+    height: 100%;
+    width: 100%; 
+    background-color:rgb(255, 255, 255);
+    display: flex;
+    flex-direction: row wrap;
+    text-align: center;
+    /* display: none; */
+
+  }
+
+  .playercard{
+    background-color: rgb(153, 152, 152);
+    margin: auto;
+    border-radius: 7%;
+    box-shadow: 0 5px 8px 0 rgba(0,0,0,0.2),
+    0 7px 20px 0 rgba(0,0,0,0.2);
+    animation-name: modalopen;
+    animation-duration: 1s;
+  }
+
+  .playercard:hover{
+    filter: brightness(125%);
+  }
+
+  .player, .ai{
+    background-color: Transparent;
+    border: none;
+    cursor:pointer;
+    outline:none;
+    font-family: 'Just Another Hand', cursive;
+    font-size: 45px;
+    color:rgba(255, 255, 255, 0.905);
+    text-shadow: 2px 2px #090202;
+  }
+
+  .player:hover, .ai:hover{
+    color:rgb(73, 6, 6);
+    transform: scale(1.3); 
+  }
+
+  #player1, #player2{
+    color:rgb(73, 6, 6);
+
+  }
+
+  #vs{
+    font-size: 150px;
+    margin-top: 1%;
+    color: rgb(82, 82, 82);
+    text-shadow: 2px 2px #969393;
+  } 
+
+  p{
+    margin-bottom: 0;
+  }
+
+  h3{
+    margin-top: 0;
+    margin-bottom: 0;
+    font-size: 50px;
+    color: rgb(82, 82, 82);
+    text-shadow: 2px 2px #090101;
+  }
+
+  #go{
+    border:none;
+    font-size: 1.8rem;
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+    background-color: rgb(82, 82, 82);
+    color: rgb(151, 147, 147);
+    text-shadow: 2px 2px #090101;
+    box-shadow: 1px 1px #4b2727;
+    cursor: pointer;
+  }
+
+  #go:hover{
+    filter: brightness(125%);
+  }
+  
+  #go:active{
+    transform: translate(0, 0.1rem);
+    text-shadow: 0.5px 0.5px #090101;
+   box-shadow: 0.5px 0.5px #4b2727;
   }
 
 
@@ -137,7 +233,7 @@ h1{
   text-shadow: 2px 2px #4b2727;
 
 }
-h3{
+#winner{
   margin-top: 10px;
   margin-bottom: 15px;
   font-size: 70px;
@@ -180,7 +276,7 @@ h3{
 
 #closeBtn:hover, .closeBtn:focus{
   filter: brightness(90%);
-    text-decoration: none;
+  text-decoration: none;
    cursor: pointer;
 }
 
@@ -189,6 +285,32 @@ h3{
     .gameboard{
       width: 65%;
       height: 65%;
+    }
+
+    .settings{
+      flex-flow: column;
+      position: absolute;
+      padding: 10px;
+    }
+    #vs{
+      font-size: 40px;
+      color: rgb(82, 82, 82);
+      text-shadow: 2px 2px #969393;
+      margin-top: 0;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      justify-content: center;
+    } 
+    p{
+      margin: 5%;
+      padding-left: 25%;
+    }
+    #go{
+      height: 50px;
+      width: 50px;
+      font-size: 1.2rem;
+      margin: 5%;
     }
   }
 
