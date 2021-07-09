@@ -55,13 +55,13 @@ h1{
 }
 
 .gameboard {
-  display: grid;
   grid-template-columns: repeat(3, 1fr);
   width: 40%;
   height: 40%; 
   margin-bottom: 5%;
-      display: none;
-
+  display: none;
+  animation-name: modalopen;
+  animation-duration: 0.5s;
 }
 
   
@@ -111,8 +111,6 @@ h1{
     display: flex;
     flex-direction: row wrap;
     text-align: center;
-    /* display: none; */
-
   }
 
   .playercard{
@@ -206,6 +204,8 @@ h1{
   overflow: auto; 
   background-color: rgba(162, 157, 156, 0.741);
   color: rgb(75, 120, 115);
+  animation-name: modalopen;
+  animation-duration: 0.5s;
 }
 
 .modalWinContent{
@@ -215,13 +215,15 @@ h1{
   height: 350px;
   box-shadow: 0 5px 8px 0 rgba(0,0,0,0.2),
   0 7px 20px 0 rgba(0,0,0,0.2);
-  animation-name: modalopen;
-  animation-duration: 1s;
   display: flex;
   align-items: center;
   flex-flow: column wrap;
   font-family: 'Just Another Hand', cursive;
+}
 
+@keyframes modalopen{
+  from{opacity: 0}
+  to{opacity: 1}
 }
 
 
@@ -231,6 +233,7 @@ h1{
   margin: 0;
   color:rgb(131, 140, 140);
   text-shadow: 2px 2px #4b2727;
+
 
 }
 #winner{
@@ -254,7 +257,6 @@ h1{
   text-shadow: 2px 2px #4b2727;
   box-shadow: 2px 2px #4b2727;
   cursor: pointer;
-
 }
 
 #tryagain:hover{
@@ -281,6 +283,7 @@ h1{
 }
 
 
+
   @media screen and (max-width:900px) {
     .gameboard{
       width: 65%;
@@ -302,7 +305,7 @@ h1{
       flex-wrap: nowrap;
       justify-content: center;
     } 
-    p{
+    #vsp{
       margin: 5%;
       padding-left: 25%;
     }

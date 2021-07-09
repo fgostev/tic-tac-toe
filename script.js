@@ -162,8 +162,8 @@ function openModal(player){
 }
 
 
-function closeModal(){
-    modalWin.style.display = 'none';
+function closeModal(selectedModal){
+    selectedModal.style.display = 'none';
 }
 function clickOutside(e){
     if(e.target == modalWin){
@@ -176,14 +176,40 @@ function clickOutside(e){
 window.addEventListener('click', clickOutside);
 
 const closeBtn = document.getElementById('closeBtn');
-closeBtn.addEventListener('click', closeModal);
+closeBtn.addEventListener('click', function(){
+    closeModal(modalWin)
+});
 
 const tryAgainBtn = document.getElementById('tryagain');
 
 tryAgainBtn.addEventListener('click', () =>{
     restartBoard();
-    closeModal();
+    closeModal(modalWin);
 });
+
+
+// settings
+
+function test(){
+    console.log("test")
+}
+const modalSettings = document.getElementsByClassName("settings")[0];
+const gameBoardContainer = document.getElementsByClassName("gameboard")[0];
+
+const goBtn = document.getElementById('go');
+goBtn.addEventListener('click', function(){
+    closeModal(modalSettings);
+    gameBoardContainer.style.display = "grid";
+});
+
+// call setting btn
+
+const settingsBtn = document.getElementById("settings")
+settingsBtn.addEventListener('click', function(){
+    closeModal(gameBoardContainer);
+    modalSettings.style.display = "flex";
+});
+
 
 })();
 
