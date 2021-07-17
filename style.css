@@ -136,6 +136,8 @@ h1{
     font-size: 45px;
     color:rgba(255, 255, 255, 0.905);
     text-shadow: 2px 2px #090202;
+    text-transform: uppercase;
+
   }
 
   .player:hover, .ai:hover{
@@ -147,6 +149,12 @@ h1{
     color:rgb(73, 6, 6);
 
   }
+
+  ::placeholder {
+    color: rgb(73, 6, 6);
+    text-transform: capitalize;
+  }
+  
 
   #vs{
     font-size: 150px;

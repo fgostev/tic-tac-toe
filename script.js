@@ -28,34 +28,12 @@ const createPlayer = (name, figure) => {
 
 const game = (() => {
 
-    const Player1 = createPlayer("Player 1", "x");
+    const Player1 = createPlayer("You", "x");
     const Player2 = createPlayer("Player 2", "o");
 
     let round = 1;
 
-    // function turn(){
 
-    //     if(round % 2 === 0){
-    //         this.textContent = Player2.figure;
-    //         gameBoard.board.splice(this.id, 1, Player2.figure);
-    //         this.disabled = true;
-    //         player2Moves.push(parseInt(this.id));
-    //         player2Moves.sort();
-    //     }
-    //     else{
-    //         this.textContent = Player1.figure;
-    //         gameBoard.board.splice(this.id, 1, Player1.figure);
-    //         this.disabled = true;
-    //         player1Moves.push(parseInt(this.id));
-    //         player1Moves.sort();
-    //     }
-    //     gameWinner();
-    //     round++;
-    // }
-
-    // function randomAi(){
-
-    // }
     function displayBoard(){
         for(i = 0; i < gameBoard.squareArr.length; i++){
             const square = gameBoard.squareArr[i];  
@@ -64,9 +42,21 @@ const game = (() => {
         }
     }
 
+    // function turn(){
 
+
+
+    // function randomAi(){
+
+    // }
+    let player1Moves = [];
+    let player2Moves = [];
 
     function turn(){
+
+        if(Player2.name === "Machine")
+        {
+
         gameBoard.board.splice(this.id, 1, Player1.figure);
         this.disabled = true;
 
@@ -77,39 +67,60 @@ const game = (() => {
             }
         }
         let randomIndex = Math.floor(Math.random() * possibleMoves.length);
-        gameBoard.board.splice(possibleMoves[randomIndex], 1, Player2.figure);
+        if(player1Moves.length < 4){
+            gameBoard.board.splice(possibleMoves[randomIndex], 1, Player2.figure);
+            gameBoard.squareArr[possibleMoves[randomIndex]].disabled = true;
+        }
+
+        
         trackPlayerMoves();
-
-
         // console.log(player2Moves);
         // console.log(player1Moves);
-        console.log("Possible move" + " " + possibleMoves);
-        console.log("Chosen move" + " " + possibleMoves[randomIndex]);
-        console.log("player1" + " " + player1Moves);
-        console.log("player2" + " " + player2Moves);
+        // console.log("Possible move" + " " + possibleMoves);
+        // console.log("Chosen move" + " " + possibleMoves[randomIndex]);
+        // console.log("player1" + " " + player1Moves);
+        // console.log("player2" + " " + player2Moves);
 
         gameWinner();
         round++;
+    }else {
+            if(round % 2 === 0){
+            this.textContent = Player2.figure;
+            gameBoard.board.splice(this.id, 1, Player2.figure);
+            this.disabled = true;
+            player2Moves.push(parseInt(this.id));
+            player2Moves.sort();
+        }
+        else{
+            this.textContent = Player1.figure;
+            gameBoard.board.splice(this.id, 1, Player1.figure);
+            this.disabled = true;
+            player1Moves.push(parseInt(this.id));
+            player1Moves.sort();
+        }
+        gameWinner();
+        round++;
     }
+}
+
 
 //  track player moves
 
-let player1Moves = [];
-let player2Moves = [];
+function trackPlayerMoves(){
 
-    function trackPlayerMoves(){
+    gameBoard.board.forEach((val, idx) => {
+        if(val === "x" && !player1Moves.includes(idx)){
+            player1Moves.push(idx);
+            player1Moves.sort();
+        }else if(val === "o" && !player2Moves.includes(idx)){
+            player2Moves.push(idx);
+            player2Moves.sort();
+        }
+    })    
+    displayBoard();
+}
 
-        gameBoard.board.forEach((val, idx) => {
-            if(val === "x" && !player1Moves.includes(idx)){
-                player1Moves.push(idx);
-                player1Moves.sort();
-            }else if(val === "o" && !player2Moves.includes(idx)){
-                player2Moves.push(idx);
-                player2Moves.sort();
-            }
-        })    
-        displayBoard();
-    }
+
 
 
 // array from player moves to compare with the win results
@@ -211,7 +222,7 @@ function openModal(player){
     if(player2Win === true || player1Win === true){
         h3.textContent = `${player} won!`;
         trophy.className = "fas fa-trophy";
-    } else{
+    } else if(!(player2Win === true && player1Win === true ) && player1Moves.length > 3  || player2Moves.length > 3){
         h3.textContent = "TIE!"
         trophy.className = "fas fa-equals";
     }
@@ -256,6 +267,9 @@ const goBtn = document.getElementById('go');
 goBtn.addEventListener('click', function(){
     closeModal(modalSettings);
     gameBoardContainer.style.display = "grid";
+    if(player1Input.value !== ""){
+        Player1.name = player1Input.value;
+    }
 });
 
 // call setting btn
@@ -266,6 +280,30 @@ settingsBtn.addEventListener('click', function(){
     modalSettings.style.display = "flex";
 });
 
+// player selection
+
+const ai2Btn = document.getElementById("ai2");
+
+const player1Input = document.getElementById('player1');
+const player2Btn = document.getElementById('player2');
+
+
+ai2Btn.addEventListener('click', active2Ai);
+player2Btn.addEventListener('click', active2Player);
+
+function active2Ai(){
+    player2Btn.style.color = 'rgba(255, 255, 255, 0.905)';
+    ai2Btn.style.color = 'rgb(73, 6, 6)';
+    Player2.name = "Machine";
+    console.log(Player2.name);
+}
+
+function active2Player(){
+    player2Btn.style.color = 'rgb(73, 6, 6)';
+    ai2Btn.style.color = 'rgba(255, 255, 255, 0.905)';
+    Player2.name = "Player 2";
+    console.log(Player2.name);
+}
 
 })();
 
