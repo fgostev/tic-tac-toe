@@ -42,13 +42,7 @@ const game = (() => {
         }
     }
 
-    // function turn(){
 
-
-
-    // function randomAi(){
-
-    // }
     let player1Moves = [];
     let player2Moves = [];
 
@@ -74,13 +68,6 @@ const game = (() => {
 
         
         trackPlayerMoves();
-        // console.log(player2Moves);
-        // console.log(player1Moves);
-        // console.log("Possible move" + " " + possibleMoves);
-        // console.log("Chosen move" + " " + possibleMoves[randomIndex]);
-        // console.log("player1" + " " + player1Moves);
-        // console.log("player2" + " " + player2Moves);
-
         gameWinner();
         round++;
     }else {
