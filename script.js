@@ -206,10 +206,14 @@ function openModal(player){
     const h3 = document.getElementById("winner");
     const p = document.getElementById("trophy");
     trophy = p.children[0];
-    if(player2Win === true || player1Win === true){
+    if(player1Win === true  ){
         h3.textContent = `${player} won!`;
         trophy.className = "fas fa-trophy";
-    } else if(!(player2Win === true && player1Win === true ) && player1Moves.length > 3  || player2Moves.length > 3){
+    }else if(player2Win === true) {
+        h3.textContent = `${player} won!`;
+        trophy.className = "fas fa-trophy"; 
+    }
+    else if(!(player2Win === true && player1Win === true ) && player1Moves.length > 3  || player2Moves.length > 3){
         h3.textContent = "TIE!"
         trophy.className = "fas fa-equals";
     }
