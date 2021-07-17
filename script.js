@@ -9,15 +9,14 @@ const gameBoard = (() => {
 
 
     // add index and array to the grid
+
+        for(i = 0; i < squareArr.length; i++){
+            const square = squareArr[i];  
+            square.id = i;      
+            square.textContent = board[i];
+        }
     
-    for(i = 0; i < squareArr.length; i++){
-        const square = squareArr[i];  
-        square.id = i;      
-        square.textContent = board[i];
-    }
-
-
-    return { board, squareArr };
+    return { board, squareArr};
 })();
 
 const createPlayer = (name, figure) => {  
@@ -29,36 +28,89 @@ const createPlayer = (name, figure) => {
 
 const game = (() => {
 
-
-    
     const Player1 = createPlayer("Player 1", "x");
     const Player2 = createPlayer("Player 2", "o");
 
     let round = 1;
 
-    function turn(){
+    // function turn(){
 
-        if(round % 2 === 0){
-            this.textContent = Player2.figure;
-            gameBoard.board.splice(this.id, 1, Player2.figure);
-            this.disabled = true;
-            player2Moves.push(parseInt(this.id));
-            player2Moves.sort();
+    //     if(round % 2 === 0){
+    //         this.textContent = Player2.figure;
+    //         gameBoard.board.splice(this.id, 1, Player2.figure);
+    //         this.disabled = true;
+    //         player2Moves.push(parseInt(this.id));
+    //         player2Moves.sort();
+    //     }
+    //     else{
+    //         this.textContent = Player1.figure;
+    //         gameBoard.board.splice(this.id, 1, Player1.figure);
+    //         this.disabled = true;
+    //         player1Moves.push(parseInt(this.id));
+    //         player1Moves.sort();
+    //     }
+    //     gameWinner();
+    //     round++;
+    // }
+
+    // function randomAi(){
+
+    // }
+    function displayBoard(){
+        for(i = 0; i < gameBoard.squareArr.length; i++){
+            const square = gameBoard.squareArr[i];  
+            square.id = i;      
+            square.textContent = gameBoard.board[i];
         }
-        else{
-            this.textContent = Player1.figure;
-            gameBoard.board.splice(this.id, 1, Player1.figure);
-            this.disabled = true;
-            player1Moves.push(parseInt(this.id));
-            player1Moves.sort();
+    }
+
+
+
+    function turn(){
+        gameBoard.board.splice(this.id, 1, Player1.figure);
+        this.disabled = true;
+
+        let possibleMoves = [];
+        for( let i = 0; i < gameBoard.board.length; i++){
+            if(gameBoard.board[i] === ""){
+                possibleMoves.push(i);
+            }
         }
+        let randomIndex = Math.floor(Math.random() * possibleMoves.length);
+        gameBoard.board.splice(possibleMoves[randomIndex], 1, Player2.figure);
+        trackPlayerMoves();
+
+
+        // console.log(player2Moves);
+        // console.log(player1Moves);
+        console.log("Possible move" + " " + possibleMoves);
+        console.log("Chosen move" + " " + possibleMoves[randomIndex]);
+        console.log("player1" + " " + player1Moves);
+        console.log("player2" + " " + player2Moves);
+
         gameWinner();
         round++;
     }
 
+//  track player moves
 
 let player1Moves = [];
 let player2Moves = [];
+
+    function trackPlayerMoves(){
+
+        gameBoard.board.forEach((val, idx) => {
+            if(val === "x" && !player1Moves.includes(idx)){
+                player1Moves.push(idx);
+                player1Moves.sort();
+            }else if(val === "o" && !player2Moves.includes(idx)){
+                player2Moves.push(idx);
+                player2Moves.sort();
+            }
+        })    
+        displayBoard();
+    }
+
 
 // array from player moves to compare with the win results
 
@@ -86,13 +138,13 @@ let player2Moves = [];
     let tie = false;
     
     function gameWinner(){
-
+    
     const winner = document.getElementById("winner");
     
         const winningLines = [
                     [0, 1, 2],
                     [3, 4, 5],
-                    [5, 6, 7],
+                    [6, 7, 8],
                     [0, 3, 6],
                     [1, 4, 7],
                     [2, 5, 8],
@@ -134,6 +186,10 @@ function restartBoard(){
         square.textContent = "";
         square.disabled = false;
     })
+
+    console.log(player1Moves);
+    console.log(player2Moves);
+    
 }
 
 restart.addEventListener('click', restartBoard);
@@ -212,8 +268,4 @@ settingsBtn.addEventListener('click', function(){
 
 
 })();
-
-// for today:
-// modal for winner
-// modal for settings and player customization
 
