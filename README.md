@@ -1,17 +1,3 @@
-Tic-tac-toe project plan:
+Tic tac toe project. 2 player mode and 1 player vs basic AI.
 
-Mark-up and design:
--Add title on top  +++
--Build the grid with buttons   +++
--Get centered position  +++
-
-Functionality:
--Create functionality - next steps TBD!
-
--Extra:
--Add modal for picking the player and start
--Add AI to computer
-
-FOR TOMORROWWW!!!
-
-Start with the top elements, keep positioning
+live page @https://fgostev.github.io/tic-tac-toe/
